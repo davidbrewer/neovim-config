@@ -18,7 +18,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'powerline/fonts'
@@ -226,70 +225,18 @@ autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.json,*.rb set shiftwidth=2 softta
 
 "" FZF
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+nnoremap <C-p> :FZF<cr>
 nnoremap <leader>f :FZF<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>a :Ag<cr>
+nnoremap <leader>g :GFiles?<cr>
+nnoremap <leader>t :BLines<cr>
+nnoremap <leader>T :Lines<cr>
+nnoremap <leader>c :BCommits<cr>
+nnoremap <leader>C :Commits<cr>
 
 "" HTML
 let g:closetag_filenames = '*.html,*.jinja2'
-
-"" ctrlp configuration
-
-" ctrlp {
-    let g:ctrlp_working_path_mode = 'ra'
-    nnoremap <silent> <D-t> :CtrlP<CR>
-    nnoremap <silent> <D-r> :CtrlPMRU<CR>
-    let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-        \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-
-    if executable('ag')
-        let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
-    elseif executable('ack-grep')
-        let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
-    elseif executable('ack')
-        let s:ctrlp_fallback = 'ack %s --nocolor -f'
-    " On Windows use "dir" as fallback command.
-    elseif WINDOWS()
-        let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
-    else
-        let s:ctrlp_fallback = 'find %s -type f'
-    endif
-    "if exists("g:ctrlp_user_command")
-        "unlet g:ctrlp_user_command
-    "endif
-    "let g:ctrlp_user_command = {
-        "\ 'types': {
-            "\ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-            "\ 2: ['.hg', 'hg --cwd %s locate -I .'],
-        "\ },
-        "\ 'fallback': s:ctrlp_fallback
-    "\ }
-"}
-
-" the default configuration for ctrlp in spf13 sets a custom user
-" command, but that ends up causing our custom ignore rules to
-" be useless because it overrides them. So instead, we'll fall back
-" to the default ctrlp behavior of globbing, which works with the ignore
-" rules. You have to do this here rather than the bundles file or else it
-" gets overwritten.
-"unlet g:ctrlp_user_command
-"let g:ctrlp_user_command = ''
-
-" let's modify those ignore rules slightly
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn\|cache$\|\/web\/assets$',
-    \ 'file': '\.exe$\|\.so$\|\.dll$' }
-
-" ... regex mode by default
-let g:ctrlp_regexp = 1
-
-" show hidden files, such as dotfiles
-let g:ctrlp_show_hidden = 1
-
-" working path from root of starting directory
-let g:ctrlp_working_path_mode = 'a'
-
-" bind ctrl-P to run ctrlp in buffer mode
-nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
 " Fugitive {
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -332,15 +279,6 @@ imap <F1> <Esc>
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  " bind leader-g to Ag shortcut
-  " nmap <silent> <leader>g :Ag<SPACE>
 endif
 
 " Since I use an aliased grep, tell various parts of the config to 
