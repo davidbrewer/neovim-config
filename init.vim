@@ -170,6 +170,13 @@ let g:ale_linters = {
 \   'python': ['flake8'],
 \}
 
+" lint when we change text in normal mode
+let g:ale_lint_on_text_changed = 'normal'
+
+" lint when we leave insert mode
+let g:ale_lint_on_insert_leave = 1
+
+
 " To lint python, you must execute flake8 using the version of python
 " which you want to lint!
 let g:ale_python_flake8_executable = 'python2'
@@ -181,10 +188,16 @@ let g:ale_python_flake8_options = '-m flake8'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" when hitting enter on an autocomplete, go to next line
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
 " disable autocomplete by default
-" let b:deoplete_disable_auto_complete=1
-" let g:deoplete_disable_auto_complete=1
-" call deoplete#custom#buffer_option('auto_complete', v:false)
+"let b:deoplete_disable_auto_complete=1
+"let g:deoplete_disable_auto_complete=1
+"call deoplete#custom#buffer_option('auto_complete', v:false)
 
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
