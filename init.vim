@@ -194,7 +194,8 @@ endif
 call deoplete#custom#source('_',
             \ 'disabled_syntaxes', ['Comment', 'String'])
 
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+set completeopt -=preview
 
 " set deoplete sources
 "let g:deoplete#sources = {}
