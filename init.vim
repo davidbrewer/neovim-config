@@ -26,6 +26,7 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'jiangmiao/auto-pairs'
 
 "Plug 'easymotion/vim-easymotion'
 
