@@ -27,6 +27,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tmhedberg/SimpylFold'
+Plug 'Konfekt/FastFold'
 
 "Plug 'easymotion/vim-easymotion'
 
@@ -125,6 +127,9 @@ set writebackup        " ... except while saving over a file
 set undofile           " Track undos
 set undolevels=1000    " Maximum number of changes that can be undone
 set undoreload=10000   " Maximum number lines to save for undo on a buffer reload
+
+"" Folds
+let g:SimpylFold_docstring_preview = 1
 
 "" NERDTree
 let NERDTreeShowBookmarks=1
