@@ -29,6 +29,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tmhedberg/SimpylFold'
 Plug 'Konfekt/FastFold'
+Plug 'airblade/vim-rooter'
 
 "Plug 'easymotion/vim-easymotion'
 
@@ -187,6 +188,10 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_python_flake8_executable = 'python2'
 let g:ale_python_flake8_options = '-m flake8'
 
+"" Python
+let g:python_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim3/bin/python'
+
 "" Autocompletion
 
 " deoplete options
@@ -240,6 +245,10 @@ nnoremap <leader>t :BLines<cr>
 nnoremap <leader>T :Lines<cr>
 nnoremap <leader>c :BCommits<cr>
 nnoremap <leader>C :Commits<cr>
+
+"" Rooter
+" When we automatically change root directory... do it silently.
+let g:rooter_silent_chdir = 1
 
 "" HTML
 let g:closetag_filenames = '*.html,*.jinja2'
