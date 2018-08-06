@@ -74,6 +74,11 @@ set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 " getting munged.
 set pastetoggle=<F2>
 
+" Let's highlight column 80 (but gray, to be subtle)
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+
 " Use Q for formatting the current paragraph (or selection)
 vmap Q gq
 nmap Q gqap
@@ -160,6 +165,11 @@ endfunction
 map <leader>e :call NERDTreeToggleInCurDir()<CR>
 nmap <leader>nt :call NERDTreeToggleInCurDir()<CR>
 
+"" NERDCommenter
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+
 " Markdown
 let g:vim_markdown_folding_disabled = 1
 
@@ -232,7 +242,7 @@ set completeopt -=preview
 
 "" Filetypes
 autocmd BufRead,BufNewFile *.jinja2 setfiletype jinja2
-autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.json,*.rb set shiftwidth=2 softtabstop=2
+autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.json,*.rb,*.html,*.jinja  set shiftwidth=2 softtabstop=2
 
 "" FZF
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
