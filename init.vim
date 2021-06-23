@@ -30,6 +30,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tmhedberg/SimpylFold'
 Plug 'Konfekt/FastFold'
 Plug 'airblade/vim-rooter'
+Plug 'wlangstroth/vim-racket'
+Plug 'leafgarland/typescript-vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'stephpy/vim-yaml'
+Plug 'tpope/vim-dotenv'
+Plug 'lambdatoast/elm.vim'
 
 "Plug 'easymotion/vim-easymotion'
 
@@ -169,6 +175,7 @@ nmap <leader>nt :call NERDTreeToggleInCurDir()<CR>
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDSpaceDelims = 1
 
 " Markdown
 let g:vim_markdown_folding_disabled = 1
@@ -202,11 +209,16 @@ let g:ale_python_flake8_options = '-m flake8'
 let g:python_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim3/bin/python'
 
+"" Elm
+let g:ale_elm_format_executable = 'elm-format'
+let g:ale_elm_format_use_global = 1
+let g:ale_elm_format_options = '--yes --elm-version=0.19'
+
 "" Autocompletion
 
 " deoplete options
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('enable_at_startup', 1)
+call deoplete#custom#option('enable_smart_case', 1)
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -219,9 +231,9 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 "let g:deoplete_disable_auto_complete=1
 "call deoplete#custom#buffer_option('auto_complete', v:false)
 
-if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-endif
+" if !exists('g:deoplete#omni#input_patterns')
+"     let g:deoplete#omni#input_patterns = {}
+" endif
 
 " Disable the candidates in Comment/String syntaxes.
 call deoplete#custom#source('_',
@@ -242,7 +254,7 @@ set completeopt -=preview
 
 "" Filetypes
 autocmd BufRead,BufNewFile *.jinja2 setfiletype jinja2
-autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.json,*.rb,*.html,*.jinja  set shiftwidth=2 softtabstop=2
+autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.ts,*.json,*.rb,*.html,*.jinja  set shiftwidth=2 softtabstop=2
 
 "" FZF
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
