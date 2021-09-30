@@ -212,9 +212,9 @@ autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.ts,*.json,*.rb,*.html,*.jinja  se
 "" FZF
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 nnoremap <C-p> :FZF<cr>
-nnoremap <leader>f :FZF<cr>
+nnoremap <leader>fz :FZF<cr>
 nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>a :Ag<cr>
+nnoremap <leader>ag :Ag<cr>
 nnoremap <leader>g :GFiles?<cr>
 nnoremap <leader>t :BLines<cr>
 nnoremap <leader>T :Lines<cr>
@@ -229,12 +229,13 @@ let g:rooter_silent_chdir = 1
 let g:closetag_filenames = '*.html,*.jinja2'
 
 " Fugitive {
-nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gs :Git<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gc :Git commit<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
+nnoremap <silent> <leader>gl :Gclog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>ga :Git add .<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
