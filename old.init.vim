@@ -38,6 +38,8 @@ Plug 'tpope/vim-dotenv'
 Plug 'lambdatoast/elm.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 "Plug 'easymotion/vim-easymotion'
 
 call plug#end()

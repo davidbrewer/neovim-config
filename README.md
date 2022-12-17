@@ -1,18 +1,27 @@
 neovim-config
 =============
 
-My configuration files for neovim.
+My configuration files for neovim. This is a Lua based config.
 
-This is a pretty rough, disorganized, mixed-bag of settings. But it's 
-working for me so far and is a good upgrade from what I was doing before,
-which was entirely based on the excellent (but getting outdated) spf13-vim 
-distribution. 
+Basic install instructions on Mac:
 
-Thanks to @valignatev, whose nvim configuration I used as a starting point.
+```
+brew install fzf ripgrep fd
+git clone https://github.com/davidbrewer/neovim-config ~/.config/nvim
 
-Basic install instructions:
+# Install packer
+mkdir -p ~/.config/nvim/pack/packer/start 
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.config/nvim/pack/packer/start/packer.nvim
 
-    sudo aptitude install silversearcher-ag neovim
-    git clone https://github.com/davidbrewer/neovim-config ~/.config/nvim
-    nvim
-    # Within nvim, run :PlugInstall
+# Run nvim and install packages
+nvim
+# run :PackerCompile
+# run :PackerInstall
+# close and reopen nvim
+```
+
+Installation should be similar on other platforms, but using package
+management and config locations appropriate for your platform.
+
+Note that things may be pretty slow at first while nvim downloads and compiles
+dependencies such as treesitter languages.
