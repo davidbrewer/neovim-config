@@ -51,7 +51,6 @@ ICEBOX: plugins that I might back in later depending on how things go
 
 
 Plug 'w0rp/ale'
-Plug 'sheerun/vim-polyglot'
 Plug 'alvan/vim-closetag'
 Plug 'bling/vim-bufferline'
 Plug 'hail2u/vim-css3-syntax'

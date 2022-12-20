@@ -182,7 +182,7 @@ require('lualine').setup {
         theme = lualine_theme,
     },
     sections = {
-        lualine_a = {'mode'},
+        lualine_a = {{'mode', fmt = function(str) return str:sub(1,1) end}},
         lualine_b = {'filename'},
         lualine_c = {'branch', 'diff', 'diagnostics'},
         lualine_x = {'encoding', 'filetype'},
