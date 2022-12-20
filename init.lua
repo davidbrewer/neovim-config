@@ -3,6 +3,7 @@ local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
+local api = vim.api  -- to access Vim API
 
 -- disabling netrw at the recommendation of nvim-tree
 g.loaded_netrw = 1
@@ -35,7 +36,7 @@ opt.sidescrolloff = 5       -- horizontal scroll offset
 opt.confirm = true          -- prompt to save before quitting
 opt.wrap = false            -- Do not wrap long lines
 opt.autoindent = true       -- Indent at the same level of the previous line
-opt.joinspaces = false      -- Prevents inserting two spaces after 
+opt.joinspaces = false      -- Prevents inserting two spaces after
                                 -- punctuation on a join (J)
 opt.virtualedit = 'onemore' -- Allow for cursor beyond last character
 opt.history = 1000          -- Store a ton of history (default is 20)
@@ -49,7 +50,7 @@ opt.viewoptions = 'folds,options,cursor,unix,slash'
 opt.list = true
 opt.listchars = 'tab:» ,extends:›,precedes:‹,nbsp:·,trail:·'
 
--- Add support for 'paste mode', which allows you to mass paste text 
+-- Add support for 'paste mode', which allows you to mass paste text
 -- without it getting munged.
 opt.pastetoggle = '<F2>'
 
@@ -110,6 +111,9 @@ vim.keymap.set('n', '<leader>ag', builtin.live_grep, {})  -- grep through all fi
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})    -- navigate buffers
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})  -- search help tags
 
+
+
+
 -- Treesitter configuration
 local ts = require 'nvim-treesitter.configs'
 ts.setup {
@@ -125,13 +129,13 @@ opt.foldenable=true
 -- reload folds when entering files; this is necessary to work around
 -- bug where files opened via telescope don't have working folds:
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
+api.nvim_create_autocmd({ "BufEnter" }, {
     pattern = { "*" },
     command = "normal zx",
 })
 
 -- Windows
--- Open new split window to the right for vertical and below for horizontal. 
+-- Open new split window to the right for vertical and below for horizontal.
 opt.splitbelow = true
 opt.splitright = true
 
@@ -160,7 +164,7 @@ nmap("<leader>tf", ":NvimTreeFindFile<CR>")
 -- Gitsigns configuration
 require('gitsigns').setup()
 
--- Fugitive configuration 
+-- Fugitive configuration
 nmap('<leader>gs', ':Git<CR>')
 nmap('<leader>gd', ':Gdiff<CR>')
 nmap('<leader>gc', ':Git commit<CR>')
@@ -213,6 +217,20 @@ require("indent_blankline").setup {
     char_blankline = '',
 }
 
+-- vim-closetag config
+g.closetag_xhtml_filenames = '*.html,*.xhtml,*.jsx,*.jinja2'
+
+-- spaceless config
+require('spaceless').setup()
+
+-- bufferline config
+require("bufferline").setup{
+    options = {
+        diagnostics = "coc",
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+    }
+}
 
 --[[
 
@@ -268,8 +286,6 @@ autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.ts,*.json,*.rb,*.html,*.jinja  se
 " When we automatically change root directory... do it silently.
 let g:rooter_silent_chdir = 1
 
-"" HTML
-let g:closetag_filenames = '*.html,*.jinja2'
 
 
 
@@ -282,7 +298,7 @@ nmap <silent> <leader>y :.w! ~/.vbuf<CR>
 nmap <silent> <leader>p :r ~/.vbuf<CR>
 
 
-" Map F1 to Esc, since that's what I'm usually reach for when I 
+" Map F1 to Esc, since that's what I'm usually reach for when I
 " accidentally hit it!
 map <F1> <Esc>
 imap <F1> <Esc>
@@ -293,7 +309,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-" Since I use an aliased grep, tell various parts of the config to 
+" Since I use an aliased grep, tell various parts of the config to
 " use a raw grep instead
 let g:gitgutter_escape_grep = 1
 "set grepprg=grep\ -nH
@@ -330,20 +346,6 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-
-" Strip whitespace {
-function! StripTrailingWhitespace()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " do the business:
-    %s/\s\+$//e
-    " clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-" }
 
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer>  call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt

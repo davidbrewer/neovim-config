@@ -10,6 +10,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-surround'
     use 'lukas-reineke/indent-blankline.nvim'
+    use 'alvan/vim-closetag'
 
     -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
     use {
@@ -43,6 +44,14 @@ return require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "v3.*",
+        requires = 'nvim-tree/nvim-web-devicons'
+    }
+
+    use 'lewis6991/spaceless.nvim'
+
 end)
 
 --[[
@@ -51,8 +60,6 @@ ICEBOX: plugins that I might back in later depending on how things go
 
 
 Plug 'w0rp/ale'
-Plug 'alvan/vim-closetag'
-Plug 'bling/vim-bufferline'
 Plug 'hail2u/vim-css3-syntax'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-rooter'
