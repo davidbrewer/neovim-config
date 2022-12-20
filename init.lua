@@ -4,6 +4,10 @@ local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
 
+-- disabling netrw at the recommendation of nvim-tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
 -- Set Leader
 g.mapleader = "\\"
 
@@ -82,6 +86,12 @@ opt.undofile = true    -- Track undos
 opt.undolevels = 1000  -- Maximum number of changes that can be undone
 opt.undoreload = 10000 -- Maximum number lines to save for undo on a buffer reload
 
+-- Easy window navigation
+nmap('<C-h>', '<C-w>h')
+nmap('<C-j>', '<C-w>j')
+nmap('<C-k>', '<C-w>k')
+nmap('<C-l>', '<C-w>l')
+
 -- Configure NERDCommenter
 g.NERDDefaultAlign = 'left'
 g.NERDCommentEmptyLines = 1
@@ -107,12 +117,91 @@ ts.setup {
     highlight = {enable = true},
     indent = {enable = true}
 }
+opt.foldlevel = 20
 opt.foldmethod="expr"
 opt.foldexpr="nvim_treesitter#foldexpr()"
-opt.foldenable=false
+opt.foldenable=true
 
+-- reload folds when entering files; this is necessary to work around
+-- bug where files opened via telescope don't have working folds:
+-- https://github.com/nvim-telescope/telescope.nvim/issues/699
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = { "*" },
+    command = "normal zx",
+})
+
+-- Windows
+-- Open new split window to the right for vertical and below for horizontal. 
+opt.splitbelow = true
+opt.splitright = true
+
+-- Configuration for nvim-tree
+require("nvim-tree").setup({
+    renderer = { icons = { show = { file = true, folder = true, git = true }}},
+    filters = {
+        custom = {
+            '\\.py[cd]$', '\\~$', '\\.swo$', '\\.swp$',
+            '^\\.git$', '^\\.hg$', '^\\.svn$', '\\.bzr$'
+        }
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+        },
+    },
+
+
+})
+
+nmap("<leader>e", ":NvimTreeToggle<CR>")
+nmap("<leader>t", ":NvimTreeToggle<CR>")
+nmap("<leader>tf", ":NvimTreeFindFile<CR>")
+
+-- Gitsigns configuration
+require('gitsigns').setup()
+
+-- Fugitive configuration 
+nmap('<leader>gs', ':Git<CR>')
+nmap('<leader>gd', ':Gdiff<CR>')
+nmap('<leader>gc', ':Git commit<CR>')
+nmap('<leader>gb', ':Git blame<CR>')
+nmap('<leader>gl', ':Gclog<CR>')
+nmap('<leader>gp', ':Git push<CR>')
+nmap('<leader>ga', ':Git add .<CR>')
+nmap('<leader>gr', ':Gread<CR>')
+nmap('<leader>gw', ':Gwrite<CR>')
+nmap('<leader>ge', ':Gedit<CR>')
+-- Mnemonic _i_nteractive
+nmap('<leader>gi', ':Git add -p %<CR>')
+nmap('<leader>gg', ':SignifyToggle<CR>')
+
+-- Lualine config
+local lualine_theme = require'lualine.themes.base16'
+require('lualine').setup {
+    options = {
+        theme = lualine_theme,
+    },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'filename'},
+        lualine_c = {'branch', 'diff', 'diagnostics'},
+        lualine_x = {'encoding', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+    },
+}
 
 --[[
+--
+
 
 " Use Q for formatting the current paragraph (or selection)
 vmap Q gq
@@ -122,64 +211,12 @@ nmap Q gqap
 nnoremap j gj
 nnoremap k gk
 
-
-"" Windows
-" Open new split window to the right for vertical
-" and below for horizontal. Both for regular windows
-" and for netrw.
-set splitbelow
-set splitright
-let g:netrw_altv=1
-let g:netrw_alto=1
-
-"" Search
-set ignorecase         " ignore case in searches...
-set smartcase          " ...unless the search contains caps
-" No search highlighting while in insert mode
-autocmd InsertEnter * :setlocal nohlsearch
-autocmd InsertLeave * :setlocal hlsearch
-" CTRL-L clears all search highlights
-nnoremap <C-l> :nohlsearch<CR><C-l>
-set gdefault           " by default, replace all cases on the line
-
-
 "" Folds
 let g:SimpylFold_docstring_preview = 1
-
-"" NERDTree
-let NERDTreeShowBookmarks=1
-let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=1
-
-" Defines a function which calls NERDTreeFind if we have an open
-" buffer, but NERDTreeToggle if we don't. This makes it so we can
-" always open NERDTree in the appropriate directory.
-function! NERDTreeToggleInCurDir()
-  " If NERDTree is open in the current buffer
-  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-    exe ":NERDTreeClose"
-  else
-    if (expand("%:t") != '')
-      exe ":NERDTreeFind"
-    else
-      exe ":NERDTreeToggle"
-    endif
-  endif
-endfunction
-
-map <leader>e :call NERDTreeToggleInCurDir()<CR>
-nmap <leader>nt :call NERDTreeToggleInCurDir()<CR>
 
 
 " Markdown
 let g:vim_markdown_folding_disabled = 1
-
-"" NetRW
-let g:netrw_banner = 0
 
 "" Linting
 let g:ale_sign_column_always = 1
@@ -216,18 +253,6 @@ let g:ale_elm_format_options = '--yes --elm-version=0.19'
 autocmd BufRead,BufNewFile *.jinja2 setfiletype jinja2
 autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.ts,*.json,*.rb,*.html,*.jinja  set shiftwidth=2 softtabstop=2
 
-"" FZF
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-nnoremap <C-p> :FZF<cr>
-nnoremap <leader>fz :FZF<cr>
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>ag :Ag<cr>
-nnoremap <leader>g :GFiles?<cr>
-nnoremap <leader>t :BLines<cr>
-nnoremap <leader>T :Lines<cr>
-nnoremap <leader>c :BCommits<cr>
-nnoremap <leader>C :Commits<cr>
-
 "" Rooter
 " When we automatically change root directory... do it silently.
 let g:rooter_silent_chdir = 1
@@ -235,21 +260,6 @@ let g:rooter_silent_chdir = 1
 "" HTML
 let g:closetag_filenames = '*.html,*.jinja2'
 
-" Fugitive {
-nnoremap <silent> <leader>gs :Git<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Git commit<CR>
-nnoremap <silent> <leader>gb :Git blame<CR>
-nnoremap <silent> <leader>gl :Gclog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>ga :Git add .<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
-" Mnemonic _i_nteractive
-nnoremap <silent> <leader>gi :Git add -p %<CR>
-nnoremap <silent> <leader>gg :SignifyToggle<CR>
-"}
 
 
 ""
@@ -402,19 +412,6 @@ let g:bufferline_echo = 0
 "" GRAVEYARD: Commented stuff I may delete
 ""
 
-" start out files with all folds opened
-" autocmd Syntax * normal zR
-" let g:DisableAutoPHPFolding = 1
-
-" ... add ignore rules
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-" don't remember position in svn and git commit temporary files
-"let g:skipview_files = ['*\.vim', 'svn-commit\.*', 'COMMIT_EDITMSG']"
-
-"Plug 'sgur/vim-editorconfig'
-
-
 " let's turn off arrow keys to get used to using the proper keys for
 " navigation
 "map <up> <nop>
@@ -422,10 +419,5 @@ let g:bufferline_echo = 0
 "map <left> <nop>
 "map <right> <nop>
 
-" Easy window navigation
-"map <C-h> <C-w>h
-"map <C-j> <C-w>j
-"map <C-k> <C-w>k
-"map <C-l> <C-w>l
 
 --]]

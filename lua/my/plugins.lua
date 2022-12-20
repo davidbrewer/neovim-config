@@ -1,46 +1,55 @@
 
 return require('packer').startup(function(use)
 
-  use 'wbthomason/packer.nvim'
-  use { 'neoclide/coc.nvim', branch = 'release' }
-  use 'scrooloose/nerdcommenter'
-  use 'overcache/NeoSolarized'
+    use 'wbthomason/packer.nvim'
+    use { 'neoclide/coc.nvim', branch = 'release' }
+    use 'scrooloose/nerdcommenter'
+    use 'overcache/NeoSolarized'
+    use 'tpope/vim-fugitive'
 
-  -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+    -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
-  -- Requires local dependencies: ripgrep (rg) and fd
-  -- Install those using homebrew: `brew install ripgrep fd`
-  use {
-    'nvim-telescope/telescope.nvim',
-     branch = '0.1.x',
-     requires = { {'nvim-lua/plenary.nvim'} }
-  }
+    -- Requires local dependencies: ripgrep (rg) and fd
+    -- Install those using homebrew: `brew install ripgrep fd`
+    use {
+        'nvim-telescope/telescope.nvim',
+         branch = '0.1.x',
+         requires = { {'nvim-lua/plenary.nvim'} }
+    }
 
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-  -- common
-  -- use 'tpope/vim-fugitive' -- Git commands
-  -- use { 'tpope/vim-rails', ft = "ruby" } -- only load when opening Ruby file
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        tag = 'nightly',
+    }
+
+    use {
+        'lewis6991/gitsigns.nvim',
+        tag = 'release',
+    }
+
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+
+end)
+
 --[[
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'godlygeek/tabular'  " vim-markdown dependency
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'sheerun/vim-polyglot'
-Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'powerline/fonts'
 Plug 'bling/vim-bufferline'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'hail2u/vim-css3-syntax'
 " Plug 'jiangmiao/auto-pairs'
@@ -64,5 +73,4 @@ Plug 'junegunn/fzf.vim'
 --]]
 
 
-end)
 
