@@ -199,9 +199,27 @@ require('lualine').setup {
     },
 }
 
---[[
---
+-- indent-blankline config
+cmd[[highlight IndentBlanklineChar guifg=#364246 gui=nocombine]]
+cmd[[highlight IndentBlanklineContextChar guifg=#657b83 gui=nocombine]]
 
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = false,
+    show_current_context_start = false,
+    use_treesitter = true,
+    use_treesitter_scope = true,
+    char_blankline = '',
+}
+
+
+--[[
+
+""
+"" ICEBOX: Stuff left over from my old config. Left here in case I determine
+"" I miss some of it and want to port it into Lua config someday.
+""
 
 " Use Q for formatting the current paragraph (or selection)
 vmap Q gq
@@ -210,13 +228,6 @@ nmap Q gqap
 " remap up and down so that they don't jump past wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-"" Folds
-let g:SimpylFold_docstring_preview = 1
-
-
-" Markdown
-let g:vim_markdown_folding_disabled = 1
 
 "" Linting
 let g:ale_sign_column_always = 1
@@ -262,10 +273,6 @@ let g:closetag_filenames = '*.html,*.jinja2'
 
 
 
-""
-"" RESCUES: Stuff brought over from my old config
-""
-
 " custom copy'n'paste
 " slightly modified version of tip from brudermarkus on vim.wikia.com
 " use leader y to yank content to a temporary buffer file, leader p
@@ -290,9 +297,6 @@ endif
 " use a raw grep instead
 let g:gitgutter_escape_grep = 1
 "set grepprg=grep\ -nH
-
-" Map F5 to a simple menu of buffers 
-nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Remove period from keyword definition, so that
 " motions stop at periods.
@@ -375,49 +379,11 @@ nnoremap <silent> <leader>q gwip
     nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
     vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 " }
-"
-" vim-airline {
-    " Set configuration options for the statusline plugin vim-airline.
-    " Use the powerline theme and optionally enable powerline symbols.
-    " To use the symbols , , , , , , and .in the statusline
-    " segments add the following to your .vimrc.before.local file:
-    "   let g:airline_powerline_fonts=1
-    " If the previous symbols do not render for you then install a
-    " powerline enabled font.
-    let g:airline_powerline_fonts=1
-
-    " See `:echo g:airline_theme_map` for some more choices
-    " Default in terminal vim is 'dark'
-    if !exists('g:airline_theme')
-        let g:airline_theme = 'solarized'
-    endif
-    if !exists('g:airline_powerline_fonts')
-        " Use the default set of separators with a few customizations
-        let g:airline_left_sep='›'  " Slightly fancier than '>'
-        let g:airline_right_sep='‹' " Slightly fancier than '<'
-    endif
-
-    " ale integration with airline 
-    let g:airline#extensions#ale#enabled = 1
-
-    " replace parts of airline status bar we aren't using with information we can
-    "let g:airline_section_b = '%{getcwd()}'
-    "let g:airline_section_c = '%t'
-" }
 
 " Don't echo bufferline to the command bar
 let g:bufferline_echo = 0
 
-""
-"" GRAVEYARD: Commented stuff I may delete
-""
 
-" let's turn off arrow keys to get used to using the proper keys for
-" navigation
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
 
 
 --]]

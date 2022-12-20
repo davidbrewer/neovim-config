@@ -5,7 +5,11 @@ return require('packer').startup(function(use)
     use { 'neoclide/coc.nvim', branch = 'release' }
     use 'scrooloose/nerdcommenter'
     use 'overcache/NeoSolarized'
+    use 'tpope/vim-repeat'
+    use 'tpope/vim-commentary'
     use 'tpope/vim-fugitive'
+    use 'tpope/vim-surround'
+    use 'lukas-reineke/indent-blankline.nvim'
 
     -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
     use {
@@ -42,34 +46,28 @@ return require('packer').startup(function(use)
 end)
 
 --[[
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+
+ICEBOX: plugins that I might back in later depending on how things go
+
+
 Plug 'w0rp/ale'
-Plug 'godlygeek/tabular'  " vim-markdown dependency
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'sheerun/vim-polyglot'
 Plug 'alvan/vim-closetag'
 Plug 'bling/vim-bufferline'
-Plug 'tpope/vim-commentary'
 Plug 'hail2u/vim-css3-syntax'
 " Plug 'jiangmiao/auto-pairs'
-Plug 'tmhedberg/SimpylFold'
-Plug 'Konfekt/FastFold'
 Plug 'airblade/vim-rooter'
 Plug 'wlangstroth/vim-racket'
 Plug 'leafgarland/typescript-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'stephpy/vim-yaml'
-Plug 'tpope/vim-dotenv'
 Plug 'lambdatoast/elm.vim'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'godlygeek/tabular'  " vim-markdown dependency
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
--- Skipped these for now, maybe don't include?
-Plug 'flazz/vim-colorschemes'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 --]]
 
 
