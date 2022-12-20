@@ -1,4 +1,4 @@
--- Shortcut functions for using map, nmap, imap
+-- Shortcut functions for using map, nmap, imap, vmap
 function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
@@ -9,4 +9,8 @@ end
 
 function imap(shortcut, command)
   map('i', shortcut, command)
+end
+
+function vmap(shortcut, command)
+  map('v', shortcut, command)
 end

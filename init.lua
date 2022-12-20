@@ -111,9 +111,6 @@ vim.keymap.set('n', '<leader>ag', builtin.live_grep, {})  -- grep through all fi
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})    -- navigate buffers
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})  -- search help tags
 
-
-
-
 -- Treesitter configuration
 local ts = require 'nvim-treesitter.configs'
 ts.setup {
@@ -232,6 +229,19 @@ require("bufferline").setup{
     }
 }
 
+-- custom copy'n'paste
+-- slightly modified version of tip from brudermarkus on vim.wikia.com
+-- use leader y to yank content to a temporary buffer file, leader p
+-- to paste it. This supports pasting between instances of vim.
+vmap('<leader>y', ':w! ~/.vbuf<CR>')
+nmap('<leader>y', ':.w! ~/.vbuf<CR>')
+nmap('<leader>p', ':r ~/.vbuf<CR>')
+
+-- Map F1 to Esc, since that's what I'm usually reaching for when I
+-- accidentally hit it!
+nmap('<F1>', '<Esc>')
+imap('<F1>', '<Esc>')
+
 --[[
 
 ""
@@ -273,11 +283,6 @@ let g:ale_python_flake8_options = '-m flake8'
 let g:python_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim3/bin/python'
 
-"" Elm
-let g:ale_elm_format_executable = 'elm-format'
-let g:ale_elm_format_use_global = 1
-let g:ale_elm_format_options = '--yes --elm-version=0.19'
-
 "" Filetypes
 autocmd BufRead,BufNewFile *.jinja2 setfiletype jinja2
 autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.ts,*.json,*.rb,*.html,*.jinja  set shiftwidth=2 softtabstop=2
@@ -289,19 +294,6 @@ let g:rooter_silent_chdir = 1
 
 
 
-" custom copy'n'paste
-" slightly modified version of tip from brudermarkus on vim.wikia.com
-" use leader y to yank content to a temporary buffer file, leader p
-" to paste it. This supports pasting between instances of vim.
-vmap <silent> <leader>y :w! ~/.vbuf<CR>
-nmap <silent> <leader>y :.w! ~/.vbuf<CR>
-nmap <silent> <leader>p :r ~/.vbuf<CR>
-
-
-" Map F1 to Esc, since that's what I'm usually reach for when I
-" accidentally hit it!
-map <F1> <Esc>
-imap <F1> <Esc>
 
 " The Silver Searcher
 if executable('ag')
