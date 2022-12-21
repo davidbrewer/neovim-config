@@ -263,7 +263,7 @@ require('nvim-lastplace').setup {
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = {
     "*.lua", "*.css", "*.scss", "*.js", "*.ts", "*.json",
-    "*.rb", "*.html", "*.jinja", "*.jinja2", "*.jsx"
+    "*.rb", "*.html", "*.jinja", "*.jinja2", "*.jsx", "*.yaml", "*.yml",
   },
   command = "set shiftwidth=2 softtabstop=2",
 })
