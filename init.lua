@@ -19,7 +19,8 @@ end
 
 load('my.helpers')
 load('my.plugins')
-load('my.coc-config')
+-- load('my.coc-config')
+load('my.lsp-config')
 
 -- Quickly edit/reload the vimrc file
 nmap("<leader>ev", ":e ~/.config/nvim/init.lua<cr>")
@@ -146,8 +147,6 @@ opt.foldmethod="expr"
 opt.foldexpr="nvim_treesitter#foldexpr()"
 opt.foldenable=true
 
-
-
 -- reload folds when entering files; this is necessary to work around
 -- bug where files opened via telescope don't have working folds:
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
@@ -254,7 +253,7 @@ require('spaceless').setup()
 -- bufferline config
 require("bufferline").setup{
   options = {
-    diagnostics = "coc",
+    diagnostics = "nvim_lsp",
     show_buffer_close_icons = false,
     show_close_icon = false,
   }
