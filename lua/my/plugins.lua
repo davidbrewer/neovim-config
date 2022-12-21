@@ -47,23 +47,3 @@ return require('packer').startup(function(use)
   }
 
 end)
-
---[[
-
-ICEBOX: plugins that I might back in later depending on how things go
-
-
-Plug 'w0rp/ale'
-
-
-Plug 'airblade/vim-rooter'
-Plug 'godlygeek/tabular'  " vim-markdown dependency
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'hail2u/vim-css3-syntax'
-Plug 'jiangmiao/auto-pairs'
-Plug 'leafgarland/typescript-vim'
-
---]]
-
-
-

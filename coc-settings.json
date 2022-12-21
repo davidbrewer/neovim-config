@@ -1,5 +1,6 @@
 {
   "Lua.telemetry.enable": false,
   "Lua.diagnostics.globals": ["vim"],
-  "suggest.noselect": true
+  "suggest.noselect": true,
+  "inlayHint.enable": false,
 }
