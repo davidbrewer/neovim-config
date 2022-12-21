@@ -40,7 +40,7 @@ opt.joinspaces = false      -- Prevents inserting two spaces after
                                 -- punctuation on a join (J)
 opt.virtualedit = 'onemore' -- Allow for cursor beyond last character
 opt.history = 1000          -- Store a ton of history (default is 20)
--- opt.updatetime = 250     -- refresh time in ms (after done typing)
+opt.updatetime = 300        -- refresh time in ms (after done typing)
 -- opt.lazyredraw = true    -- postpone redraw on macro execution for perf
 
 -- Better Unix / Windows compatibility
@@ -268,11 +268,10 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   command = "set shiftwidth=2 softtabstop=2",
 })
 
--- " Remove period from keyword definition, so that
--- " motions stop at periods.
--- set iskeyword-=.      " '.' is an end of word designator
--- set iskeyword-=#      " '#' is an end of word designator
--- set iskeyword-=-      " '-' is an end of word designator
+-- Modify keyword definitions so that motions end at ., #, and -
+opt.iskeyword:remove { "." }
+opt.iskeyword:remove { "#" }
+opt.iskeyword:remove { "-" }
 
 --[[
 
