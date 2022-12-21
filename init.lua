@@ -114,9 +114,9 @@ vim.keymap.set('n', '<leader>h', builtin.help_tags, {})  -- search help tags
 -- Treesitter configuration
 local ts = require 'nvim-treesitter.configs'
 ts.setup {
-    ensure_installed = 'all',
-    highlight = {enable = true},
-    indent = {enable = true}
+  ensure_installed = 'all',
+  highlight = {enable = true},
+  indent = {enable = true}
 }
 opt.foldlevel = 20
 opt.foldmethod="expr"
@@ -127,8 +127,8 @@ opt.foldenable=true
 -- bug where files opened via telescope don't have working folds:
 -- https://github.com/nvim-telescope/telescope.nvim/issues/699
 api.nvim_create_autocmd({ "BufEnter" }, {
-    pattern = { "*" },
-    command = "normal zx",
+  pattern = { "*" },
+  command = "normal zx",
 })
 
 -- Windows
@@ -138,20 +138,18 @@ opt.splitright = true
 
 -- Configuration for nvim-tree
 require("nvim-tree").setup({
-    renderer = { icons = { show = { file = true, folder = true, git = true }}},
-    filters = {
-        custom = {
-            '\\.py[cd]$', '\\~$', '\\.swo$', '\\.swp$',
-            '^\\.git$', '^\\.hg$', '^\\.svn$', '\\.bzr$'
-        }
+  renderer = { icons = { show = { file = true, folder = true, git = true }}},
+  filters = {
+    custom = {
+      '\\.py[cd]$', '\\~$', '\\.swo$', '\\.swp$',
+      '^\\.git$', '^\\.hg$', '^\\.svn$', '\\.bzr$'
+    }
+  },
+  actions = {
+    open_file = {
+      quit_on_open = true,
     },
-    actions = {
-        open_file = {
-            quit_on_open = true,
-        },
-    },
-
-
+  },
 })
 
 nmap("<leader>e", ":NvimTreeToggle<CR>")
@@ -187,25 +185,25 @@ nmap('<leader>gg', ':SignifyToggle<CR>')
 -- Lualine config
 local lualine_theme = require'lualine.themes.base16'
 require('lualine').setup {
-    options = {
-        theme = lualine_theme,
-    },
-    sections = {
-        lualine_a = {{'mode', fmt = function(str) return str:sub(1,1) end}},
-        lualine_b = {'filename'},
-        lualine_c = {'branch', 'diff', 'diagnostics'},
-        lualine_x = {'encoding', 'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'location'}
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {'filename'},
-        lualine_x = {'location'},
-        lualine_y = {},
-        lualine_z = {}
-    },
+  options = {
+    theme = lualine_theme,
+  },
+  sections = {
+    lualine_a = {{'mode', fmt = function(str) return str:sub(1,1) end}},
+    lualine_b = {'filename'},
+    lualine_c = {'branch', 'diff', 'diagnostics'},
+    lualine_x = {'encoding', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
 }
 
 -- indent-blankline config
@@ -213,13 +211,13 @@ cmd[[highlight IndentBlanklineChar guifg=#364246 gui=nocombine]]
 cmd[[highlight IndentBlanklineContextChar guifg=#657b83 gui=nocombine]]
 
 require("indent_blankline").setup {
-    show_current_context = true,
-    show_trailing_blankline_indent = false,
-    show_first_indent_level = false,
-    show_current_context_start = false,
-    use_treesitter = true,
-    use_treesitter_scope = true,
-    char_blankline = '',
+  show_current_context = true,
+  show_trailing_blankline_indent = false,
+  show_first_indent_level = false,
+  show_current_context_start = false,
+  use_treesitter = true,
+  use_treesitter_scope = true,
+  char_blankline = '',
 }
 
 -- vim-closetag config
@@ -230,11 +228,11 @@ require('spaceless').setup()
 
 -- bufferline config
 require("bufferline").setup{
-    options = {
-        diagnostics = "coc",
-        show_buffer_close_icons = false,
-        show_close_icon = false,
-    }
+  options = {
+    diagnostics = "coc",
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+  }
 }
 
 -- Applying indentation keeps you in Visual mode
@@ -256,10 +254,25 @@ imap('<F1>', '<Esc>')
 
 -- Configure lastplace (remembers where you were when reopening files)
 require('nvim-lastplace').setup {
-    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
-    lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
-    lastplace_open_folds = true
+  lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+  lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+  lastplace_open_folds = true
 }
+
+-- Set indentation preferences by filetype
+api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = {
+    "*.lua", "*.css", "*.scss", "*.js", "*.ts", "*.json",
+    "*.rb", "*.html", "*.jinja", "*.jinja2", "*.jsx"
+  },
+  command = "set shiftwidth=2 softtabstop=2",
+})
+
+-- " Remove period from keyword definition, so that
+-- " motions stop at periods.
+-- set iskeyword-=.      " '.' is an end of word designator
+-- set iskeyword-=#      " '#' is an end of word designator
+-- set iskeyword-=-      " '-' is an end of word designator
 
 --[[
 
@@ -267,14 +280,6 @@ require('nvim-lastplace').setup {
 "" ICEBOX: Stuff left over from my old config. Left here in case I determine
 "" I miss some of it and want to port it into Lua config someday.
 ""
-
-" Use Q for formatting the current paragraph (or selection)
-vmap Q gq
-nmap Q gqap
-
-" remap up and down so that they don't jump past wrapped lines
-nnoremap j gj
-nnoremap k gk
 
 "" Linting
 let g:ale_sign_column_always = 1
@@ -292,7 +297,6 @@ let g:ale_lint_on_text_changed = 'normal'
 " lint when we leave insert mode
 let g:ale_lint_on_insert_leave = 1
 
-
 " To lint python, you must execute flake8 using the version of python
 " which you want to lint!
 let g:ale_python_flake8_executable = 'python2'
@@ -302,17 +306,16 @@ let g:ale_python_flake8_options = '-m flake8'
 let g:python_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/davidbrewer/.pyenv/versions/neovim3/bin/python'
 
-"" Filetypes
-autocmd BufRead,BufNewFile *.jinja2 setfiletype jinja2
-autocmd BufRead,BufNewFile *.css,*.scss,*.js,*.ts,*.json,*.rb,*.html,*.jinja  set shiftwidth=2 softtabstop=2
-
-"" Rooter
-" When we automatically change root directory... do it silently.
-let g:rooter_silent_chdir = 1
 
 
+--- PROBABLY UNWANTED ITEMS BELOW HERE
+--
 
-
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer>  call StripTrailingWhitespace()
+"autocmd FileType go autocmd BufWritePre <buffer> Fmt
+autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
+autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
+" preceding line best in a plugin but here for now.
 
 " The Silver Searcher
 if executable('ag')
@@ -325,29 +328,17 @@ endif
 let g:gitgutter_escape_grep = 1
 "set grepprg=grep\ -nH
 
-" Remove period from keyword definition, so that
-" motions stop at periods.
-set iskeyword-=.      " '.' is an end of word designator
-set iskeyword-=#      " '#' is an end of word designator
-set iskeyword-=-      " '-' is an end of word designator
-
-" bind leader-k to search for word under cursor
-map <silent> <leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer>  call StripTrailingWhitespace()
-"autocmd FileType go autocmd BufWritePre <buffer> Fmt
-autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
-autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
-" preceding line best in a plugin but here for now.
-
---- PROBABLY UNWANTED ITEMS BELOW HERE
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+"" Rooter
+" When we automatically change root directory... do it silently.
+let g:rooter_silent_chdir = 1
+
 
 
 --]]
