@@ -27,22 +27,25 @@ nmap("<leader>sv", ":so ~/.config/nvim/init.lua<cr>")
 
 -- Interface Options
 opt.number = true           -- line numbers
-opt.mouse = ''              -- mouse support off
-opt.clipboard = 'unnamed'   -- use system clipboard when yanking
+-- opt.mouse = ''              -- mouse support off
+-- opt.clipboard = 'unnamed'   -- use system clipboard when yanking
 opt.cursorline = true       -- highlight current line
 opt.title = true            -- set terminal title
 opt.linebreak = true        -- soft wrapping of text
-opt.scrolloff = 3           -- scroll offset (show this many lines ahead)
+opt.scrolloff = 4           -- scroll offset (show this many lines ahead)
 opt.sidescrolloff = 5       -- horizontal scroll offset
 opt.confirm = true          -- prompt to save before quitting
 opt.wrap = false            -- Do not wrap long lines
 opt.autoindent = true       -- Indent at the same level of the previous line
+opt.smartindent = true      -- Attempt to autoindent following code syntax
 opt.joinspaces = false      -- Prevents inserting two spaces after
                                 -- punctuation on a join (J)
 opt.virtualedit = 'onemore' -- Allow for cursor beyond last character
 opt.history = 1000          -- Store a ton of history (default is 20)
 opt.updatetime = 300        -- refresh time in ms (after done typing)
 -- opt.lazyredraw = true    -- postpone redraw on macro execution for perf
+opt.ignorecase = true       -- ignore case when searching
+opt.smartcase = true        -- search ignores case unless terms have uppercase
 
 -- Better Unix / Windows compatibility
 opt.viewoptions = 'folds,options,cursor,unix,slash'
@@ -73,13 +76,14 @@ opt.background = 'dark'
 opt.spelllang = 'en_us'
 
 -- Buffers
-opt.hidden = true     -- enable use of buffers
+opt.hidden = true     -- enable use of background buffers
 opt.autoread = true   -- autoload external changes
 
 -- Indentation
 opt.tabstop = 4       -- number of spaces that a tab displays as
 opt.shiftwidth = 4    -- number of spaces that a tab inserts
 opt.expandtab = true  -- convert typed types to spaces
+opt.shiftround = true -- use multiples of shiftwidth when indenting
 
 -- Session
 opt.backup = false     -- Keep no backup files
@@ -93,6 +97,10 @@ nmap('<C-h>', '<C-w>h')
 nmap('<C-j>', '<C-w>j')
 nmap('<C-k>', '<C-w>k')
 nmap('<C-l>', '<C-w>l')
+
+-- Copy and paste to system clipboard
+vim.keymap.set({'n', 'x'}, 'cy', '"+y')
+vim.keymap.set({'n', 'x'}, 'cp', '"+p')
 
 -- Configure NERDCommenter
 g.NERDDefaultAlign = 'left'
@@ -113,16 +121,32 @@ vim.keymap.set('n', '<leader>b', builtin.buffers, {})    -- navigate buffers
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})  -- search help tags
 
 -- Treesitter configuration
+-- If you find yourself wanting more textobjects:
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 local ts = require 'nvim-treesitter.configs'
 ts.setup {
   ensure_installed = 'all',
   highlight = {enable = true},
-  indent = {enable = true}
+  indent = {enable = true},
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      },
+    },
+  },
 }
 opt.foldlevel = 20
 opt.foldmethod="expr"
 opt.foldexpr="nvim_treesitter#foldexpr()"
 opt.foldenable=true
+
+
 
 -- reload folds when entering files; this is necessary to work around
 -- bug where files opened via telescope don't have working folds:

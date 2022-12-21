@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
 
   -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- Requires local dependencies: ripgrep (rg) and fd
   -- Install those using homebrew: `brew install ripgrep fd`
@@ -44,6 +45,7 @@ return require('packer').startup(function(use)
     tag = "v3.*",
     requires = 'nvim-tree/nvim-web-devicons'
   }
+
 end)
 
 --[[
