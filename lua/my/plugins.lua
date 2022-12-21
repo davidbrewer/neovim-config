@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
   use 'ethanholz/nvim-lastplace'
   use 'lewis6991/spaceless.nvim'
 
+
   -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
