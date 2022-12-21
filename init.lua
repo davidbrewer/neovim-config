@@ -254,9 +254,16 @@ nmap('<leader>p', ':r ~/.vbuf<CR>')
 nmap('<F1>', '<Esc>')
 imap('<F1>', '<Esc>')
 
+-- Configure lastplace (remembers where you were when reopening files)
+require('nvim-lastplace').setup {
+    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+    lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+    lastplace_open_folds = true
+}
+
 --[[
 
-""
+"
 "" ICEBOX: Stuff left over from my old config. Left here in case I determine
 "" I miss some of it and want to port it into Lua config someday.
 ""
@@ -329,20 +336,6 @@ map <silent> <leader>k :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-
-" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-" Restore cursor to file position in previous editing session
-function! ResCur()
-    if line("'\"") <= line("$")
-        silent! normal! g`"
-        return 1
-    endif
-endfunction
-
-augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
-augroup END
 
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer>  call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt

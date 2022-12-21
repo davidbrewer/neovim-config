@@ -11,6 +11,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'lukas-reineke/indent-blankline.nvim'
     use 'alvan/vim-closetag'
+    use 'ethanholz/nvim-lastplace'
 
     -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
     use {
