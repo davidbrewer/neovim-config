@@ -28,6 +28,7 @@ nmap("<leader>sv", ":so ~/.config/nvim/init.lua<cr>")
 -- Interface Options
 opt.number = true           -- line numbers
 opt.mouse = ''              -- mouse support off
+opt.clipboard = 'unnamed'   -- use system clipboard when yanking
 opt.cursorline = true       -- highlight current line
 opt.title = true            -- set terminal title
 opt.linebreak = true        -- soft wrapping of text
@@ -315,17 +316,6 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
 " preceding line best in a plugin but here for now.
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" Since I use an aliased grep, tell various parts of the config to
-" use a raw grep instead
-let g:gitgutter_escape_grep = 1
-"set grepprg=grep\ -nH
 
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
