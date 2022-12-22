@@ -310,7 +310,7 @@ opt.iskeyword:remove { "-" }
 -- require('lightspeed').setup{}
 
 -- Configure leap (instead of lightspeed)
-require('leap').add_default_mappings()
+-- require('leap').add_default_mappings()
 
 -- Configure spectre
 require('spectre').setup{}
@@ -324,3 +324,4 @@ nmap('<leader>sp', '<cmd>viw:lua require(\'spectre\').open_file_search()<CR>')
 
 -- Configure fidget, which outputs LSP progress status
 require("fidget").setup{}
+

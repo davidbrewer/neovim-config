@@ -6,6 +6,12 @@ return require('packer').startup(function(use)
   use { 'ms-jpq/coq_nvim', run = 'python3 -m coq deps' }
   use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
   use { 'ms-jpq/coq.thirdparty', branch = '3p' }
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+     requires = { 'nvim-lua/plenary.nvim' }
+  }
+
   use 'jose-elias-alvarez/typescript.nvim'
   use 'scrooloose/nerdcommenter'
   use 'overcache/NeoSolarized'
