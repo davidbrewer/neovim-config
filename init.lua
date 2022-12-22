@@ -310,7 +310,7 @@ opt.iskeyword:remove { "-" }
 -- require('lightspeed').setup{}
 
 -- Configure leap (instead of lightspeed)
--- require('leap').add_default_mappings()
+require('leap').add_default_mappings()
 
 -- Configure spectre
 require('spectre').setup{}
