@@ -298,13 +298,17 @@ opt.iskeyword:remove { "#" }
 opt.iskeyword:remove { "-" }
 
 -- Configure hop
-local hop = require('hop')
-hop.setup{ keys = 'etovxqpdygfblzhckisuran' }
-vim.keymap.set('', '<leader>h', ':HopWord<cr>', {silent = true})
-vim.keymap.set('', '<leader>hc', ':HopChar1<cr>', {silent = true})
-vim.keymap.set('', '<leader>hC', ':HopChar2<cr>', {silent = true})
-vim.keymap.set('', '<leader>hl', ':HopLineStart<cr>', {silent = true})
-vim.keymap.set('', '<leader>hp', ':HopPattern<cr>', {silent = true})
+-- local hop = require('hop')
+-- hop.setup{ keys = 'etovxqpdygfblzhckisuran' }
+-- vim.keymap.set('', '<leader>h', ':HopWord<cr>', {silent = true})
+-- vim.keymap.set('', '<leader>hc', ':HopChar1<cr>', {silent = true})
+-- vim.keymap.set('', '<leader>hC', ':HopChar2<cr>', {silent = true})
+-- vim.keymap.set('', '<leader>hl', ':HopLineStart<cr>', {silent = true})
+-- vim.keymap.set('', '<leader>hp', ':HopPattern<cr>', {silent = true})
+
+-- Configure lightspeed (instead of hop)
+require('lightspeed').setup{}
+
 
 -- Configure spectre
 require('spectre').setup{}
