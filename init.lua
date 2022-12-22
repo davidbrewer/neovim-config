@@ -315,3 +315,6 @@ nmap('<leader>sw', '<cmd>lua require(\'spectre\').open_visual({select_word=true}
 nmap('<leader>s', '<cmd>lua require(\'spectre\').open_visual()<CR>')
 -- Spectre search in current file
 nmap('<leader>sp', '<cmd>viw:lua require(\'spectre\').open_file_search()<CR>')
+
+-- Configure fidget, which outputs LSP progress status
+require("fidget").setup{}
