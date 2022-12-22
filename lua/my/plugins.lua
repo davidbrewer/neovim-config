@@ -23,6 +23,13 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
+  -- Requires local dependencies: ripgrep (rg) and sed
+  -- Install those using homebrew: `brew install ripgrep gnu-sed`
+  use {
+    'windwp/nvim-spectre',
+     requires = { 'nvim-lua/plenary.nvim', 'kyazdani42/nvim-web-devicons' }
+  }
+
   -- Requires local dependencies: ripgrep (rg) and fd
   -- Install those using homebrew: `brew install ripgrep fd`
   use {

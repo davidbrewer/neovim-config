@@ -10,7 +10,7 @@ g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
 -- Set Leader
-g.mapleader = " "
+g.mapleader = "\\"
 
 local load = function(mod)
   package.loaded[mod] = nil
@@ -305,3 +305,13 @@ vim.keymap.set('', '<leader>hc', ':HopChar1<cr>', {silent = true})
 vim.keymap.set('', '<leader>hC', ':HopChar2<cr>', {silent = true})
 vim.keymap.set('', '<leader>hl', ':HopLineStart<cr>', {silent = true})
 vim.keymap.set('', '<leader>hp', ':HopPattern<cr>', {silent = true})
+
+-- Configure spectre
+require('spectre').setup{}
+-- Open Spectre
+nmap('<leader>S', '<cmd>lua require(\'spectre\').open()<CR>')
+-- Open Spectre with current word
+nmap('<leader>sw', '<cmd>lua require(\'spectre\').open_visual({select_word=true})<CR>')
+nmap('<leader>s', '<cmd>lua require(\'spectre\').open_visual()<CR>')
+-- Spectre search in current file
+nmap('<leader>sp', '<cmd>viw:lua require(\'spectre\').open_file_search()<CR>')
