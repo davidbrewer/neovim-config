@@ -18,7 +18,8 @@ return require('packer').startup(function(use)
   use 'ethanholz/nvim-lastplace'
   use 'lewis6991/spaceless.nvim'
   -- use { 'phaazon/hop.nvim', branch = 'v2' }
-  use 'ggandor/lightspeed.nvim'
+  -- use 'ggandor/lightspeed.nvim'
+  use 'ggandor/leap.nvim'
   use 'j-hui/fidget.nvim'
 
   -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation

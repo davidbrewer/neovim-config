@@ -307,8 +307,10 @@ opt.iskeyword:remove { "-" }
 -- vim.keymap.set('', '<leader>hp', ':HopPattern<cr>', {silent = true})
 
 -- Configure lightspeed (instead of hop)
-require('lightspeed').setup{}
+-- require('lightspeed').setup{}
 
+-- Configure leap (instead of lightspeed)
+require('leap').add_default_mappings()
 
 -- Configure spectre
 require('spectre').setup{}
