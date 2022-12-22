@@ -247,8 +247,8 @@ require("indent_blankline").setup {
 -- vim-closetag config
 g.closetag_xhtml_filenames = '*.html,*.xhtml,*.jsx,*.jinja2'
 
--- spaceless config
-require('spaceless').setup()
+-- tidy config
+require('tidy').setup()
 
 -- bufferline config
 require("bufferline").setup{
@@ -324,4 +324,3 @@ nmap('<leader>sp', '<cmd>viw:lua require(\'spectre\').open_file_search()<CR>')
 
 -- Configure fidget, which outputs LSP progress status
 require("fidget").setup{}
-
