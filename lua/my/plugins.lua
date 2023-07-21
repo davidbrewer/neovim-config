@@ -1,6 +1,5 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-	-- use { 'neoclide/coc.nvim', branch = 'release' }
 	use("neovim/nvim-lspconfig")
 	use({ "ms-jpq/coq_nvim", run = "python3 -m coq deps" })
 	use({ "ms-jpq/coq.artifacts", branch = "artifacts" })
@@ -24,8 +23,6 @@ return require("packer").startup(function(use)
 	use("mcauley-penney/tidy.nvim")
 	use("vim-autoformat/vim-autoformat")
 
-	-- use { 'phaazon/hop.nvim', branch = 'v2' }
-	-- use 'ggandor/lightspeed.nvim'
 	use("ggandor/leap.nvim")
 	use({ "j-hui/fidget.nvim", tag = "legacy" })
 
