@@ -12,6 +12,9 @@ g.loaded_netrwPlugin = 1
 -- Set Leader
 g.mapleader = "\\"
 
+-- Enable python support
+g.python3_host_prog="/Users/davidbrewer/.pyenv/shims/python3"
+
 local load = function(mod)
   package.loaded[mod] = nil
   require(mod)
@@ -324,3 +327,13 @@ nmap('<leader>sp', '<cmd>viw:lua require(\'spectre\').open_file_search()<CR>')
 
 -- Configure fidget, which outputs LSP progress status
 require("fidget").setup{}
+
+-- Configure vim-autoformat to reformat on save
+api.nvim_create_autocmd( { "BufWrite" }, {
+  pattern = { "*" },
+  command = ":Autoformat"
+})
+
+g.autoformat_autoindent = 0
+g.autoformat_retab = 0
+g.autoformat_remove_trailing_spaces = 0

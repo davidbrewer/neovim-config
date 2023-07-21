@@ -110,7 +110,7 @@ lspconfig['intelephense'].setup {}
 
 -- You must install the lua language server like this:
 -- brew install lua-language-server
-lspconfig['sumneko_lua'].setup {
+lspconfig['lua_ls'].setup {
   settings = {
     Lua = {
       runtime = {
