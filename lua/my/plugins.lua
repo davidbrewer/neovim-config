@@ -10,21 +10,21 @@ return require("packer").startup(function(use)
 	})
 	use("jose-elias-alvarez/typescript.nvim")
 
-	use("wellle/targets.vim")
+	-- use("wellle/targets.vim")
 	use("scrooloose/nerdcommenter")
 	use("overcache/NeoSolarized")
-	use("tpope/vim-repeat")
-	use("tpope/vim-commentary")
-	use("tpope/vim-fugitive")
-	use("tpope/vim-surround")
-	use("lukas-reineke/indent-blankline.nvim")
-	use("alvan/vim-closetag")
-	use("ethanholz/nvim-lastplace")
-	use("mcauley-penney/tidy.nvim")
+	-- use("tpope/vim-repeat")
+	-- use("tpope/vim-commentary")
+	-- use("tpope/vim-fugitive")
+	-- use("tpope/vim-surround")
+	-- use("lukas-reineke/indent-blankline.nvim")
+	-- use("alvan/vim-closetag")
+	-- use("ethanholz/nvim-lastplace")
+	-- use("mcauley-penney/tidy.nvim")
 	use("vim-autoformat/vim-autoformat")
 
-	use("ggandor/leap.nvim")
-	use({ "j-hui/fidget.nvim", tag = "legacy" })
+	-- use("ggandor/leap.nvim")
+	-- use({ "j-hui/fidget.nvim", tag = "legacy" })
 
 	-- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -32,10 +32,10 @@ return require("packer").startup(function(use)
 
 	-- Requires local dependencies: ripgrep (rg) and sed
 	-- Install those using homebrew: `brew install ripgrep gnu-sed`
-	use({
-		"windwp/nvim-spectre",
-		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
-	})
+	-- use({
+	--     "windwp/nvim-spectre",
+	--     requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
+	-- })
 
 	-- Requires local dependencies: ripgrep (rg) and fd
 	-- Install those using homebrew: `brew install ripgrep fd`
