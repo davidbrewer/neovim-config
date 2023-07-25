@@ -247,18 +247,18 @@ require("lualine").setup({
 })
 
 -- indent-blankline config
--- cmd[[highlight IndentBlanklineChar guifg=#364246 gui=nocombine]]
--- cmd[[highlight IndentBlanklineContextChar guifg=#657b83 gui=nocombine]]
+cmd([[highlight IndentBlanklineChar guifg=#364246 gui=nocombine]])
+cmd([[highlight IndentBlanklineContextChar guifg=#657b83 gui=nocombine]])
 
--- require("indent_blankline").setup {
---  show_current_context = true,
---  show_trailing_blankline_indent = false,
---  show_first_indent_level = false,
---  show_current_context_start = false,
---  use_treesitter = true,
---  use_treesitter_scope = true,
---  char_blankline = '',
--- }
+require("indent_blankline").setup({
+	show_current_context = true,
+	show_trailing_blankline_indent = false,
+	show_first_indent_level = false,
+	show_current_context_start = false,
+	use_treesitter = true,
+	use_treesitter_scope = true,
+	char_blankline = "",
+})
 
 -- vim-closetag config
 g.closetag_xhtml_filenames = "*.html,*.xhtml,*.jsx,*.jinja2"
