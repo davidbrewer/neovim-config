@@ -264,7 +264,7 @@ require("indent_blankline").setup({
 g.closetag_xhtml_filenames = "*.html,*.xhtml,*.jsx,*.jinja2"
 
 -- tidy config
--- require('tidy').setup()
+require("tidy").setup()
 
 -- bufferline config
 require("bufferline").setup({
@@ -293,11 +293,11 @@ nmap("<F1>", "<Esc>")
 imap("<F1>", "<Esc>")
 
 -- Configure lastplace (remembers where you were when reopening files)
--- require('nvim-lastplace').setup {
---  lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
---  lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
---  lastplace_open_folds = true
--- }
+require("nvim-lastplace").setup({
+	lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+	lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit" },
+	lastplace_open_folds = true,
+})
 
 -- Set indentation preferences by filetype
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -354,11 +354,15 @@ opt.iskeyword:remove({ "-" })
 -- require("fidget").setup{}
 
 -- Configure vim-autoformat to reformat on save
-api.nvim_create_autocmd({ "BufWrite" }, {
-	pattern = { "*" },
-	command = ":Autoformat",
-})
+-- api.nvim_create_autocmd({ "BufWrite" }, {
+--     pattern = { "*" },
+--     command = ":Autoformat",
+-- })
 
+-- g.autoformat_verbosemode = 1
 g.autoformat_autoindent = 0
 g.autoformat_retab = 0
 g.autoformat_remove_trailing_spaces = 0
+
+-- Disable Perl treesitter provider to avoid errors
+g.loaded_perl_provider = 0

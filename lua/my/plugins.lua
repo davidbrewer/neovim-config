@@ -17,17 +17,17 @@ return require("packer").startup(function(use)
 	-- use("tpope/vim-commentary")
 	use("tpope/vim-fugitive")
 	use("tpope/vim-surround")
-	use("lukas-reineke/indent-blankline.nvim")
+	use({ "lukas-reineke/indent-blankline.nvim", tag = "v2.20.8" })
 	-- use("alvan/vim-closetag")
-	-- use("ethanholz/nvim-lastplace")
-	-- use("mcauley-penney/tidy.nvim")
+	use("ethanholz/nvim-lastplace")
+	use("mcauley-penney/tidy.nvim")
 	use("vim-autoformat/vim-autoformat")
 
 	-- use("ggandor/leap.nvim")
 	-- use({ "j-hui/fidget.nvim", tag = "legacy" })
 
 	-- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({ "nvim-treesitter/nvim-treesitter", tag = "v0.9.2", run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 
 	-- Requires local dependencies: ripgrep (rg) and sed
