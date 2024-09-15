@@ -20,9 +20,9 @@ local load = function(mod)
 	require(mod)
 end
 
+require("config.lazy")
+
 load("my.helpers")
-load("my.plugins")
--- load('my.coc-config')
 load("my.lsp-config")
 
 -- Quickly edit/reload the vimrc file
