@@ -50,7 +50,7 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-tree/nvim-tree.lua",
 		requires = { "nvim-tree/nvim-web-devicons" },
-		tag = "nightly",
+		tag = "v1.6.1",
 	})
 
 	use({ "lewis6991/gitsigns.nvim" })

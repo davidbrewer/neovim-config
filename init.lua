@@ -60,7 +60,7 @@ opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:·,trail:·"
 
 -- Add support for 'paste mode', which allows you to mass paste text
 -- without it getting munged.
-opt.pastetoggle = "<F2>"
+-- opt.pastetoggle = "<F2>"
 
 -- Let's highlight column 80 (but gray, to be subtle)
 -- TODO: figure out what is wrong with this after getting color scheme setup
@@ -130,6 +130,7 @@ vim.keymap.set("n", "<leader>h", builtin.help_tags, {}) -- search help tags
 local ts = require("nvim-treesitter.configs")
 ts.setup({
 	ensure_installed = "all",
+    ignore_install = { "wing" },
 	highlight = { enable = true },
 	indent = { enable = true },
 	textobjects = {
