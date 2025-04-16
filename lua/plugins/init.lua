@@ -12,7 +12,7 @@ return {
   {"ms-jpq/coq.artifacts", branch = "artifacts", lazy = false },
   {"ms-jpq/coq.thirdparty", branch = "3p", lazy = false },
   {
-     "jose-elias-alvarez/null-ls.nvim",
+     "nvimtools/none-ls.nvim",
      dependencies = { "nvim-lua/plenary.nvim" },
      lazy = false
   },
@@ -32,7 +32,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", {"nvim-telescope/telescope-fzf-native.nvim", build = "make" }},
   },
   -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
-  {"nvim-treesitter/nvim-treesitter", version = "v0.9.2", build = ":TSUpdate", lazy = false },
+  {"nvim-treesitter/nvim-treesitter", version = "v0.9.3", build = ":TSUpdate", lazy = false },
   {"nvim-treesitter/nvim-treesitter-textobjects" },
 
   {"nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, version = "v1.6.1"},

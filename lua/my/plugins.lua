@@ -33,7 +33,7 @@ return require("packer").startup(function(use)
 	-- use({ "j-hui/fidget.nvim", tag = "legacy" })
 
 	-- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
-    use({ "nvim-treesitter/nvim-treesitter", tag = "v0.9.2", run = ":TSUpdate" })
+    use({ "nvim-treesitter/nvim-treesitter", tag = "v0.9.3", run = ":TSUpdate" })
     use("nvim-treesitter/nvim-treesitter-textobjects")
 
 	-- Requires local dependencies: ripgrep (rg) and sed
