@@ -39,33 +39,25 @@ local lsp_flags = {
 	debounce_text_changes = 150,
 }
 
-local lspconfig = require("lspconfig")
-
 -- Automatically start coq
 vim.g.coq_settings = { auto_start = "shut-up" }
 
--- Enable some language servers with the additional completion capabilities offered by coq_nvim
--- IS THIS NECESSARY NOW?
--- local servers = { 'clangd', 'rust_analyzer', 'pyright', 'ts_ls' }
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup(require('coq').lsp_ensure_capabilities({
---     -- on_attach = my_custom_on_attach,
---   }))
--- end
-
 -- requires local install of pyright LSP like this:
 -- npm i -g pyright
-lspconfig["pyright"].setup({
+vim.lsp.enable("pyright")
+vim.lsp.config("pyright", {
 	on_attach = on_attach,
 	flags = lsp_flags,
 })
 
 -- requires local install of tsserver LSP like this:
 -- npm i -g typescript typescript-language-server
--- lspconfig['tsserver'].setup{
+-- vim.lsp.enable("tsserver")
+-- vim.lsp.config("tsserver", {
 --     on_attach = on_attach,
 --     flags = lsp_flags,
--- }
+-- })
+
 require("typescript-tools").setup {
   -- on_attach = function() ... end,
   -- handlers = { ... },
@@ -117,36 +109,40 @@ require("typescript-tools").setup {
 
 -- requires local install of bash LSP like this:
 -- npm i -g bash-language-server
-lspconfig["bashls"].setup({})
+vim.lsp.enable("bashls")
 
 -- requires local install of vscode langservers like this:
 -- npm i -g vscode-langservers-extracted
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-lspconfig["cssls"].setup({
+vim.lsp.enable("cssls")
+vim.lsp.config("cssls", {
 	capabilities = capabilities,
 })
 
-lspconfig["html"].setup({
+vim.lsp.enable("html")
+vim.lsp.config("html", {
 	capabilities = capabilities,
 })
 
-lspconfig["jsonls"].setup({
+vim.lsp.enable("jsonls")
+vim.lsp.config("jsonls", {
 	capabilities = capabilities,
 })
 
 -- this one provides an :EslintFixAll command that applies eslint fixes
 -- might be worth setting up a keybinding for that? Or an autocommand on save?
--- lspconfig["eslint"].setup({})
+-- vim.lsp.enable("eslint")
 
 -- provides PHP LSP. You must install the intelephense langserver like this:
 -- npm i -g intelephense
-lspconfig["intelephense"].setup({})
+vim.lsp.enable("intelephense")
 
 -- You must install the lua language server like this:
 -- brew install lua-language-server
-lspconfig["lua_ls"].setup({
+vim.lsp.enable("lua_ls")
+vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			runtime = {
@@ -172,7 +168,7 @@ lspconfig["lua_ls"].setup({
 
 -- requires local install of docker-langserver like this:
 -- npm i -g dockerfile-language-server-nodejs
-lspconfig["dockerls"].setup({})
+vim.lsp.enable("dockerls")
 
 -- we're missing an LSP for yaml, and maybe for django specifics
 
