@@ -28,11 +28,64 @@ return {
   -- Install those using homebrew: `brew install ripgrep fd`
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
+    branch = "master",
     dependencies = { "nvim-lua/plenary.nvim", {"nvim-telescope/telescope-fzf-native.nvim", build = "make" }},
   },
   -- If having issues with folders, refer to: https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation
-  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate", lazy = false },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = false,
+    branch = "main",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    config = function()
+      -- Use the pcall (protected call) to avoid the hard crash
+      local status, ts_configs = pcall(require, "nvim-treesitter.configs")
+      if not status then
+        -- If the module is missing, we manually trigger the loaders
+        -- This is a temporary necessity for some 'main' branch builds
+        return
+      end
+
+      ts_configs.setup({
+        highlight = { enable = true },
+        indent = { enable = true },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+        },
+      })
+
+    --   require'nvim-treesitter.configs'.setup {
+    --     ensure_installed = "all",
+    --     ignore_install = { "wing" },
+    --     highlight = { enable = true },
+    --     indent = { enable = true },
+    --     textobjects = {
+    --         select = {
+    --             enable = true,
+    --             lookahead = true,
+    --             keymaps = {
+    --                 ["af"] = "@function.outer",
+    --                 ["if"] = "@function.inner",
+    --                 ["ac"] = "@class.outer",
+    --                 ["ic"] = "@class.inner",
+    --             },
+    --         },
+    --     },
+    -- }
+    end
+  },
   {"nvim-treesitter/nvim-treesitter-textobjects" },
 
   {"nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, version = "v1.6.1"},

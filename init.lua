@@ -127,25 +127,25 @@ vim.keymap.set("n", "<leader>h", builtin.help_tags, {}) -- search help tags
 -- Treesitter configuration
 -- If you find yourself wanting more textobjects:
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-local ts = require("nvim-treesitter.configs")
-ts.setup({
-	ensure_installed = "all",
-    ignore_install = { "wing" },
-	highlight = { enable = true },
-	indent = { enable = true },
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-			},
-		},
-	},
-})
+-- local ts = require("nvim-treesitter.configs")
+-- ts.setup({
+--     ensure_installed = "all",
+--     ignore_install = { "wing" },
+--     highlight = { enable = true },
+--     indent = { enable = true },
+--     textobjects = {
+--         select = {
+--             enable = true,
+--             lookahead = true,
+--             keymaps = {
+--                 ["af"] = "@function.outer",
+--                 ["if"] = "@function.inner",
+--                 ["ac"] = "@class.outer",
+--                 ["ic"] = "@class.inner",
+--             },
+--         },
+--     },
+-- })
 opt.foldlevel = 20
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
